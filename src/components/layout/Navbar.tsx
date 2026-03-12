@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { CyberButton } from "@/components/ui/CyberButton";
-import { Menu, X, Shield } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Menu, X, Shield, User, LogOut } from "lucide-react";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -15,6 +16,7 @@ const navLinks = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, isAdmin, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -50,16 +52,36 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link to="/contact" className="ml-4">
-            <CyberButton size="sm">Get Protected</CyberButton>
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-2 ml-4">
+              {isAdmin && (
+                <Link to="/admin">
+                  <CyberButton size="sm" variant="danger">Admin</CyberButton>
+                </Link>
+              )}
+              <Link to="/dashboard">
+                <CyberButton size="sm" variant="outline">
+                  <User className="h-3 w-3 mr-1" /> Portal
+                </CyberButton>
+              </Link>
+              <button onClick={signOut} className="text-muted-foreground hover:text-destructive transition-colors">
+                <LogOut className="h-4 w-4" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 ml-4">
+              <Link to="/login">
+                <CyberButton size="sm" variant="outline">Sign In</CyberButton>
+              </Link>
+              <Link to="/contact">
+                <CyberButton size="sm">Get Protected</CyberButton>
+              </Link>
+            </div>
+          )}
         </nav>
 
         {/* Mobile toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="md:hidden text-foreground" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
@@ -69,18 +91,22 @@ export function Navbar() {
         <div className="md:hidden bg-background/98 backdrop-blur-md border-b border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className="font-mono text-sm text-muted-foreground hover:text-primary py-2 tracking-wider uppercase transition-colors"
-              >
+              <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)} className="font-mono text-sm text-muted-foreground hover:text-primary py-2 tracking-wider uppercase transition-colors">
                 {link.label}
               </Link>
             ))}
-            <Link to="/contact" onClick={() => setIsOpen(false)} className="mt-2">
-              <CyberButton size="sm" className="w-full">Get Protected</CyberButton>
-            </Link>
+            {user ? (
+              <>
+                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="font-mono text-sm text-primary py-2 tracking-wider uppercase">Portal</Link>
+                {isAdmin && <Link to="/admin" onClick={() => setIsOpen(false)} className="font-mono text-sm text-destructive py-2 tracking-wider uppercase">Admin</Link>}
+                <button onClick={() => { signOut(); setIsOpen(false); }} className="font-mono text-sm text-muted-foreground hover:text-destructive py-2 tracking-wider uppercase text-left">Logout</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setIsOpen(false)} className="mt-2"><CyberButton size="sm" variant="outline" className="w-full">Sign In</CyberButton></Link>
+                <Link to="/contact" onClick={() => setIsOpen(false)}><CyberButton size="sm" className="w-full">Get Protected</CyberButton></Link>
+              </>
+            )}
           </nav>
         </div>
       )}

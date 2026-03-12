@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SectionLabel, GlowText } from "@/components/ui/CyberText";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 const threatLevelColors: Record<string, string> = {
   CRITICAL: "bg-destructive/20 text-destructive border-destructive/30",
@@ -12,54 +14,22 @@ const threatLevelColors: Record<string, string> = {
   LOW: "bg-muted text-muted-foreground border-border",
 };
 
-const samplePosts = [
-  {
-    id: "1",
-    title: "Critical Vulnerability in East African Banking Platforms",
-    slug: "critical-vuln-ea-banking",
-    excerpt: "Our threat intel team has identified a critical SQL injection vulnerability affecting multiple banking platforms across East Africa.",
-    category: "ZERO-DAY",
-    threatLevel: "CRITICAL",
-    author: "CyberHawk-UG Threat Intel Team",
-    readTime: "5 min read",
-    publishedAt: "2024-12-15",
-  },
-  {
-    id: "2",
-    title: "Ransomware Campaign Targeting Ugandan Government Agencies",
-    slug: "ransomware-campaign-ug-gov",
-    excerpt: "A new ransomware strain has been observed targeting government agencies in Uganda. Here's what you need to know.",
-    category: "RANSOMWARE",
-    threatLevel: "HIGH",
-    author: "CyberHawk-UG Threat Intel Team",
-    readTime: "8 min read",
-    publishedAt: "2024-12-10",
-  },
-  {
-    id: "3",
-    title: "AI-Powered Phishing Attacks on the Rise in Africa",
-    slug: "ai-phishing-attacks-africa",
-    excerpt: "Threat actors are leveraging AI to craft more convincing phishing emails targeting African businesses.",
-    category: "AI THREATS",
-    threatLevel: "HIGH",
-    author: "CyberHawk-UG Threat Intel Team",
-    readTime: "6 min read",
-    publishedAt: "2024-12-05",
-  },
-  {
-    id: "4",
-    title: "Best Practices for Securing Mobile Money Platforms",
-    slug: "securing-mobile-money-platforms",
-    excerpt: "Mobile money is the backbone of East African finance. Here's how to protect these critical platforms.",
-    category: "ADVISORY",
-    threatLevel: "MEDIUM",
-    author: "CyberHawk-UG Threat Intel Team",
-    readTime: "10 min read",
-    publishedAt: "2024-11-28",
-  },
-];
-
 export default function Blog() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("is_published", true)
+      .order("published_at", { ascending: false })
+      .then(({ data }) => {
+        setPosts(data || []);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -80,39 +50,47 @@ export default function Blog() {
 
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="space-y-6">
-            {samplePosts.map((post) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-card border border-border p-6 hover:border-t-primary transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className="font-mono text-xs text-primary tracking-wider">{post.category}</span>
-                  {post.threatLevel && (
-                    <span className={cn("font-mono text-[10px] px-2 py-0.5 border uppercase tracking-widest", threatLevelColors[post.threatLevel])}>
-                      {post.threatLevel}
-                    </span>
-                  )}
-                  <span className="font-mono text-xs text-muted-foreground">{post.readTime}</span>
-                </div>
-                <Link to={`/blog/${post.slug}`}>
-                  <h2 className="font-display text-xl font-600 text-foreground hover:text-primary transition-colors mb-2">
-                    {post.title}
-                  </h2>
-                </Link>
-                <p className="text-sm text-muted-foreground mb-3">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-muted-foreground">{post.publishedAt}</span>
-                  <Link to={`/blog/${post.slug}`} className="font-mono text-xs text-primary hover:underline">
-                    Read Analysis →
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {posts.map((post) => (
+                <motion.article
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-card border border-border p-6 hover:border-t-primary transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <span className="font-mono text-xs text-primary tracking-wider">{post.category}</span>
+                    {post.threat_level && (
+                      <span className={cn("font-mono text-[10px] px-2 py-0.5 border uppercase tracking-widest", threatLevelColors[post.threat_level] || "")}>
+                        {post.threat_level}
+                      </span>
+                    )}
+                    <span className="font-mono text-xs text-muted-foreground">{post.read_time}</span>
+                  </div>
+                  <Link to={`/blog/${post.slug}`}>
+                    <h2 className="font-display text-xl font-600 text-foreground hover:text-primary transition-colors mb-2">
+                      {post.title}
+                    </h2>
                   </Link>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+                  <p className="text-sm text-muted-foreground mb-3">{post.excerpt}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {post.published_at ? new Date(post.published_at).toLocaleDateString() : ""}
+                    </span>
+                    <Link to={`/blog/${post.slug}`} className="font-mono text-xs text-primary hover:underline">
+                      Read Analysis →
+                    </Link>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
