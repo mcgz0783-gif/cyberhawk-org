@@ -249,7 +249,7 @@ export default function AdminEbooks() {
                   <span className={`font-mono text-[10px] px-2 py-0.5 border uppercase tracking-widest flex-shrink-0 ${eb.is_published ? "text-primary border-primary/30 bg-primary/10" : "text-muted-foreground border-border bg-muted/20"}`}>
                     {eb.is_published ? "LIVE" : "DRAFT"}
                   </span>
-                  {eb.file_path && <FileText className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" title="PDF uploaded" />}
+                  {eb.file_path && <span title="PDF uploaded"><FileText className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" /></span>}
                 </div>
                 <p className="font-mono text-xs text-muted-foreground mt-1">
                   ${(eb.price / 100).toFixed(2)} · {eb.category || "Uncategorized"}
