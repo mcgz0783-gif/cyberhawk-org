@@ -1,132 +1,1034 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CyberHawk-UG — Defending East Africa in Cyberspace</title>
-    <meta name="description" content="Uganda&#39;s premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats.">
-    <meta name="author" content="CyberHawk-UG" />
-    
-    
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <meta property="og:title" content="CyberHawk-UG — Defending East Africa in Cyberspace">
-  <meta name="twitter:title" content="CyberHawk-UG — Defending East Africa in Cyberspace">
-  <meta property="og:description" content="Uganda&#39;s premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats.">
-  <meta name="twitter:description" content="Uganda&#39;s premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats.">
-  <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/HnjxN98hp3QIPNldYksNy5YdO223/social-images/social-1773321682015-1000107792.webp">
-  <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/HnjxN98hp3QIPNldYksNy5YdO223/social-images/social-1773321682015-1000107792.webp">
-  <meta name="twitter:card" content="summary_large_image">
-</head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>CyberHawk Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberHawk-UG — Defending East Africa in Cyberspace</title>
+  <meta name="description" content="Uganda's premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats." />
+  <meta name="author" content="CyberHawk-UG" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CyberHawk-UG — Defending East Africa in Cyberspace" />
+  <meta property="og:description" content="Uganda's premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats." />
+  <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/HnjxN98hp3QIPNldYksNy5YdO223/social-images/social-1773321682015-1000107792.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CyberHawk-UG — Defending East Africa in Cyberspace" />
+  <meta name="twitter:description" content="Uganda's premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats." />
+  <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/HnjxN98hp3QIPNldYksNy5YdO223/social-images/social-1773321682015-1000107792.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & VARIABLES ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #040a0f;
+      --bg2:       #071016;
+      --panel:     #0b1a23;
+      --panel2:    #0e2030;
+      --border:    #0e3a52;
+      --border2:   #1a5a7a;
+      --accent:    #00d4ff;
+      --accent2:   #00ff9d;
+      --warn:      #ff4e4e;
+      --text:      #c8e6f0;
+      --text-dim:  #5a8fa8;
+      --text-mono: #7ec8e3;
+      --glow:      0 0 18px #00d4ff55;
+      --glow2:     0 0 18px #00ff9d44;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── SCANLINE / GRID OVERLAY ───────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 212, 255, 0.018) 2px,
+          rgba(0, 212, 255, 0.018) 4px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER / NAV ──────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(4, 10, 15, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      position: relative;
+    }
+
+    .logo-icon svg { width: 100%; height: 100%; }
+
+    .logo-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-shadow: var(--glow);
+    }
+
+    .logo-text span { color: var(--accent2); }
+
+    nav { display: flex; align-items: center; gap: 1.8rem; }
+
+    nav a {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .nav-status {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      background: rgba(0,255,157,0.08);
+      border: 1px solid rgba(0,255,157,0.2);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    .nav-status::before { content: '● '; }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,212,255,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,255,157,0.06) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, black, transparent);
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.25);
+      padding: 4px 16px;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: #e8f6fb;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    h1 .hl { color: var(--accent); text-shadow: var(--glow); }
+    h1 .hl2 { color: var(--accent2); text-shadow: var(--glow2); }
+
+    .hero-sub {
+      margin-top: 1rem;
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 540px;
+      margin-inline: auto;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    /* ── MAIN LAYOUT ───────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* ── AUTH PANEL ────────────────────────────────────── */
+    #auth-section {
+      max-width: 460px;
+      margin: 0 auto 3rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: var(--panel2);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-header-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    .panel-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--text-mono);
+      text-transform: uppercase;
+    }
+
+    .panel-body { padding: 1.8rem; }
+
+    /* ── TABS ──────────────────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.6rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.6rem 1rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── FORM ELEMENTS ─────────────────────────────────── */
+    .field { margin-bottom: 1rem; }
+
+    label {
+      display: block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: rgba(0,212,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.6rem 0.9rem;
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(0,212,255,0.12);
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--text-dim); opacity: 0.5; }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* ── BUTTONS ───────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.5rem;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #040a0f;
+      box-shadow: 0 0 14px rgba(0,212,255,0.3);
+    }
+
+    .btn-primary:hover {
+      background: #22deff;
+      box-shadow: 0 0 22px rgba(0,212,255,0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0,255,157,0.08);
+      box-shadow: var(--glow2);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--warn);
+      border: 1px solid rgba(255,78,78,0.3);
+      font-size: 0.78rem;
+      padding: 0.35rem 0.9rem;
+    }
+
+    .btn-ghost:hover { background: rgba(255,78,78,0.08); }
+
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .btn-full { width: 100%; justify-content: center; }
+
+    /* ── ALERTS ────────────────────────────────────────── */
+    .alert {
+      padding: 0.7rem 1rem;
+      border-radius: 3px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .alert.show { display: block; }
+    .alert-error { background: rgba(255,78,78,0.1); border: 1px solid rgba(255,78,78,0.35); color: #ff7979; }
+    .alert-success { background: rgba(0,255,157,0.1); border: 1px solid rgba(0,255,157,0.35); color: var(--accent2); }
+
+    /* ── DASHBOARD ─────────────────────────────────────── */
+    #dashboard-section { display: none; animation: fadeUp 0.5s ease both; }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dash-welcome {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .dash-welcome span { color: var(--text); }
+
+    .dash-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ── STATS ROW ─────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .stat-value {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.8rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── GRID LAYOUT ───────────────────────────────────── */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .dash-grid { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+
+    /* ── POST FORM ─────────────────────────────────────── */
+    .compose-area { display: flex; flex-direction: column; gap: 0; }
+
+    /* ── POST LIST ─────────────────────────────────────── */
+    .post-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; max-height: 500px; overflow-y: auto; }
+
+    .post-list::-webkit-scrollbar { width: 4px; }
+    .post-list::-webkit-scrollbar-track { background: var(--bg2); }
+    .post-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+    .post-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 3px;
+      padding: 0.9rem 1rem;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .post-item:hover { border-color: var(--accent); background: var(--panel); }
+
+    .post-item-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .post-item-content { font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; }
+
+    .post-item-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: #3a6b80;
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .post-delete {
+      background: none;
+      border: none;
+      color: var(--warn);
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-family: 'Share Tech Mono', monospace;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .post-item:hover .post-delete { opacity: 0.7; }
+    .post-item:hover .post-delete:hover { opacity: 1; }
+
+    /* ── EMPTY STATE ───────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+    }
+
+    .empty-state::before { content: '[ NO INTEL FOUND ]'; display: block; font-size: 1rem; color: var(--border2); margin-bottom: 0.5rem; }
+
+    /* ── LOADING ───────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: #2a4a5c;
+      letter-spacing: 0.1em;
+    }
+
+    footer span { color: var(--accent); }
+
+    /* ── ANIMATIONS ────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 8px rgba(0,212,255,0.2); }
+      50%       { box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    }
+
+    .pulse { animation: pulse-glow 2.5s ease-in-out infinite; }
+  </style>
 </head>
 <body>
-  <h1>CyberHawk Dashboard</h1>
 
-  <!-- Auth -->
-  <div id="auth">
-    <h2>Sign Up / Login</h2>
-    <input id="name" placeholder="Name (signup)" />
-    <input id="email" placeholder="Email" />
-    <input id="password" type="password" placeholder="Password" />
-    <button id="signup">Sign Up</button>
-    <button id="login">Login</button>
-  </div>
+  <!-- ── HEADER ───────────────────────────────────────── -->
+  <header>
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="#00d4ff" stroke-width="1.5" fill="rgba(0,212,255,0.06)"/>
+          <path d="M18 8 L18 18 L26 22" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="3" fill="#00ff9d"/>
+          <path d="M10 13 L18 18 L10 23" stroke="rgba(0,212,255,0.4)" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <span class="logo-text">CYBER<span>HAWK</span>-UG</span>
+    </a>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Threat Intel</a>
+      <a href="#">Reports</a>
+      <a href="#">Settings</a>
+      <span class="nav-status">SYSTEMS NOMINAL</span>
+    </nav>
+  </header>
 
-  <!-- Add Post -->
-  <div id="postSection" style="display:none;">
-    <h2>Add Post</h2>
-    <input id="postTitle" placeholder="Title" />
-    <textarea id="postContent" placeholder="Content"></textarea>
-    <button id="addPost">Add Post</button>
-    <h3>Posts</h3>
-    <ul id="postList"></ul>
-  </div>
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-tag">// EAST AFRICA CYBER DEFENSE HQ</div>
+    <h1>Defending <span class="hl">East Africa</span><br>in <span class="hl2">Cyberspace</span></h1>
+    <p class="hero-sub">Uganda's premier cybersecurity firm — protecting businesses, governments, and individuals from evolving digital threats.</p>
+  </section>
 
-<script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-  const supabaseUrl = 'https://your-project.supabase.co'
-  const supabaseAnonKey = 'your-anon-key'
-  const supabase = createClient(supabaseUrl, supabaseAnonKey)
+  <!-- ── MAIN ──────────────────────────────────────────── -->
+  <main>
 
-  let token = null
+    <!-- AUTH SECTION -->
+    <section id="auth-section">
+      <div class="panel pulse">
+        <div class="panel-header">
+          <div class="panel-header-dot"></div>
+          <span class="panel-title">// SECURE AUTHENTICATION</span>
+        </div>
+        <div class="panel-body">
+          <!-- TABS -->
+          <div class="tab-bar">
+            <button class="tab-btn active" data-tab="login">Login</button>
+            <button class="tab-btn" data-tab="signup">Register</button>
+          </div>
 
-  const authDiv = document.getElementById('auth')
-  const postSection = document.getElementById('postSection')
-  const postList = document.getElementById('postList')
+          <!-- ALERT BOX -->
+          <div class="alert" id="auth-alert"></div>
 
-  async function signup() {
-    const name = document.getElementById('name').value
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const res = await fetch('http://localhost:3000/api/auth/signup', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({name,email,password})
-    })
-    const data = await res.json()
-    token = data.token
-    authDiv.style.display='none'
-    postSection.style.display='block'
-    fetchPosts()
-  }
+          <!-- LOGIN TAB -->
+          <div class="tab-pane active" id="tab-login">
+            <div class="field">
+              <label for="login-email">Email Address</label>
+              <input type="email" id="login-email" placeholder="operator@cyberhawk.ug" autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" placeholder="••••••••••" autocomplete="current-password" />
+            </div>
+            <button class="btn btn-primary btn-full" id="btn-login">
+              <span id="login-label">Authenticate</span>
+            </button>
+          </div>
 
-  async function login() {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const res = await fetch('http://localhost:3000/api/auth/login', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({email,password})
-    })
-    const data = await res.json()
-    token = data.token
-    authDiv.style.display='none'
-    postSection.style.display='block'
-    fetchPosts()
-  }
+          <!-- SIGNUP TAB -->
+          <div class="tab-pane" id="tab-signup">
+            <div class="field">
+              <label for="signup-name">Operator Name</label>
+              <input type="text" id="signup-name" placeholder="Full name" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="signup-email">Email Address</label>
+              <input type="email" id="signup-email" placeholder="operator@cyberhawk.ug" autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" placeholder="Min. 8 characters" autocomplete="new-password" />
+            </div>
+            <button class="btn btn-primary btn-full" id="btn-signup">
+              <span id="signup-label">Create Account</span>
+            </button>
+          </div>
 
-  async function fetchPosts() {
-    const res = await fetch('http://localhost:3000/api/posts', {
-      headers:{'Authorization':'Bearer '+token}
-    })
-    const data = await res.json()
-    postList.innerHTML = ''
-    data.forEach(p=>{
-      const li=document.createElement('li')
-      li.textContent=`${p.title}: ${p.content}`
-      postList.appendChild(li)
-    })
-  }
+        </div>
+      </div>
+    </section>
 
-  document.getElementById('signup').addEventListener('click', signup)
-  document.getElementById('login').addEventListener('click', login)
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard-section">
 
-  document.getElementById('addPost').addEventListener('click', async ()=>{
-    const title = document.getElementById('postTitle').value
-    const content = document.getElementById('postContent').value
-    await fetch('http://localhost:3000/api/posts', {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':'Bearer '+token
-      },
-      body: JSON.stringify({title,content})
-    })
-    fetchPosts()
-  })
-</script>
+      <div class="dash-header">
+        <div>
+          <div class="dash-welcome">WELCOME, <span id="user-display">OPERATOR</span></div>
+          <div class="dash-meta" id="dash-time">SESSION ACTIVE</div>
+        </div>
+        <button class="btn btn-ghost" id="btn-logout">[ SIGN OUT ]</button>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-posts">0</div>
+          <div class="stat-label">Intel Posts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:var(--accent2)">99.9%</div>
+          <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:#ffc46b">0</div>
+          <div class="stat-label">Active Threats</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:var(--accent2)">■■■</div>
+          <div class="stat-label">Shield Status</div>
+        </div>
+      </div>
+
+      <!-- MAIN GRID -->
+      <div class="dash-grid">
+
+        <!-- NEW POST PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-dot" style="background:var(--accent2); box-shadow: 0 0 6px var(--accent2);"></div>
+            <span class="panel-title">// COMPOSE INTEL REPORT</span>
+          </div>
+          <div class="panel-body compose-area">
+            <div class="alert" id="post-alert"></div>
+            <div class="field">
+              <label for="post-title">Report Title</label>
+              <input type="text" id="post-title" placeholder="e.g. Phishing campaign detected" />
+            </div>
+            <div class="field">
+              <label for="post-content">Intelligence Summary</label>
+              <textarea id="post-content" placeholder="Detail the threat vector, indicators of compromise, affected systems…"></textarea>
+            </div>
+            <button class="btn btn-secondary" id="btn-post">
+              <span id="post-label">Publish Report</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- POSTS LIST PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-dot"></div>
+            <span class="panel-title">// INTEL FEED</span>
+          </div>
+          <div class="panel-body">
+            <div class="alert" id="feed-alert"></div>
+            <ul class="post-list" id="post-list">
+              <li class="empty-state" id="empty-msg">Loading secure feed…</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <span>CYBERHAWK-UG</span> &nbsp;|&nbsp; DEFENDING EAST AFRICA IN CYBERSPACE &nbsp;|&nbsp; &copy; <span id="yr"></span>
+  </footer>
+
+  <!-- ── SUPABASE SDK ──────────────────────────────────── -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    /* ── ⚠️  CONFIGURATION — replace before deploying ── */
+    const SUPABASE_URL="https://cgegwzpjjkzgfmcfljsy.supabase.co"  // <-- your Supabase project URL
+    const SUPABASE_ANON_KEY=eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZWd3enBqamt6Z2ZtY2ZsanN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwOTE4NDUsImV4cCI6MjA4ODY2Nzg0NX05i5iEVqsuD1Um4t9GThlYpLau4PySJ8hgfxc4aD1eho         // <-- your Supabase anon/public key
+    const API_BASE=sb_secret_dKrVhZ6pMbqEUUt_4_IAEA_vvp_D0P         // <-- your backend API base (or use Supabase directly)
+    /* ─────────────────────────────────────────────────── */
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    /* ── STATE ─────────────────────────────────────────── */
+    let authToken  = null;
+    let currentUser = null;
+
+    /* ── DOM REFS ──────────────────────────────────────── */
+    const authSection  = document.getElementById('auth-section');
+    const dashSection  = document.getElementById('dashboard-section');
+    const postList     = document.getElementById('post-list');
+    const userDisplay  = document.getElementById('user-display');
+    const statPosts    = document.getElementById('stat-posts');
+    const dashTime     = document.getElementById('dash-time');
+    const authAlert    = document.getElementById('auth-alert');
+    const postAlert    = document.getElementById('post-alert');
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    /* ── SESSION CLOCK ─────────────────────────────────── */
+    function updateClock() {
+      dashTime.textContent = `SESSION ACTIVE — ${new Date().toUTCString().replace('GMT', 'UTC')}`;
+    }
+    setInterval(updateClock, 1000);
+
+    /* ── TABS ──────────────────────────────────────────── */
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${target}`).classList.add('active');
+        clearAlert(authAlert);
+      });
+    });
+
+    /* ── ALERT HELPERS ─────────────────────────────────── */
+    function showAlert(el, msg, type = 'error') {
+      el.textContent = msg;
+      el.className   = `alert alert-${type} show`;
+    }
+    function clearAlert(el) { el.className = 'alert'; }
+
+    function setLoading(btn, labelId, loading, text = '') {
+      btn.disabled = loading;
+      document.getElementById(labelId).innerHTML = loading
+        ? `<span class="spinner"></span> Processing…`
+        : text;
+    }
+
+    /* ── AUTH HANDLERS ─────────────────────────────────── */
+    document.getElementById('btn-signup').addEventListener('click', async () => {
+      clearAlert(authAlert);
+      const name     = document.getElementById('signup-name').value.trim();
+      const email    = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+
+      if (!name || !email || !password) return showAlert(authAlert, '⚠ All fields required.');
+      if (password.length < 8)          return showAlert(authAlert, '⚠ Password must be ≥ 8 characters.');
+
+      setLoading(document.getElementById('btn-signup'), 'signup-label', true);
+
+      try {
+        /* --- Option A: Direct Supabase Auth --- */
+        const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name } } });
+        if (error) throw error;
+        authToken   = data.session?.access_token;
+        currentUser = data.user;
+        showAlert(authAlert, '✔ Account created! Check email to confirm.', 'success');
+        if (authToken) enterDashboard(name || email);
+
+        /* --- Option B: Custom API backend (uncomment if using a REST API)
+        const res  = await fetch(`${API_BASE}/api/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Signup failed');
+        authToken = data.token;
+        enterDashboard(name);
+        --- */
+      } catch (err) {
+        showAlert(authAlert, `⚠ ${err.message}`);
+      } finally {
+        setLoading(document.getElementById('btn-signup'), 'signup-label', false, 'Create Account');
+      }
+    });
+
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      clearAlert(authAlert);
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) return showAlert(authAlert, '⚠ Email and password required.');
+
+      setLoading(document.getElementById('btn-login'), 'login-label', true);
+
+      try {
+        /* --- Option A: Direct Supabase Auth --- */
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        authToken   = data.session.access_token;
+        currentUser = data.user;
+        const name  = currentUser.user_metadata?.name || email.split('@')[0];
+        enterDashboard(name);
+
+        /* --- Option B: Custom API backend (uncomment if using a REST API)
+        const res  = await fetch(`${API_BASE}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Login failed');
+        authToken = data.token;
+        enterDashboard(email.split('@')[0]);
+        --- */
+      } catch (err) {
+        showAlert(authAlert, `⚠ ${err.message}`);
+      } finally {
+        setLoading(document.getElementById('btn-login'), 'login-label', false, 'Authenticate');
+      }
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      authToken   = null;
+      currentUser = null;
+      dashSection.style.display = 'none';
+      authSection.style.display = 'block';
+      postList.innerHTML = '<li class="empty-state" id="empty-msg">Loading secure feed…</li>';
+    });
+
+    /* ── DASHBOARD ─────────────────────────────────────── */
+    function enterDashboard(name) {
+      authSection.style.display     = 'none';
+      dashSection.style.display     = 'block';
+      userDisplay.textContent        = name.toUpperCase();
+      updateClock();
+      fetchPosts();
+    }
+
+    /* ── POSTS ─────────────────────────────────────────── */
+    async function fetchPosts() {
+      postList.innerHTML = '<li class="empty-state" id="empty-msg">Loading secure feed…</li>';
+      try {
+        /* --- Option A: Direct Supabase DB --- */
+        const { data, error } = await supabase
+          .from('posts')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        renderPosts(data || []);
+
+        /* --- Option B: Custom REST API (uncomment if using a REST API)
+        const res  = await fetch(`${API_BASE}/api/posts`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error('Failed to load posts');
+        renderPosts(data);
+        --- */
+      } catch (err) {
+        postList.innerHTML = `<li class="empty-state">⚠ ${err.message}</li>`;
+      }
+    }
+
+    function renderPosts(posts) {
+      statPosts.textContent = posts.length;
+      if (!posts.length) {
+        postList.innerHTML = '<li class="empty-state" id="empty-msg"></li>';
+        return;
+      }
+      postList.innerHTML = posts.map(p => `
+        <li class="post-item" data-id="${p.id}">
+          <div class="post-item-title">${escHtml(p.title)}</div>
+          <div class="post-item-content">${escHtml(p.content)}</div>
+          <div class="post-item-meta">
+            <span>${p.created_at ? new Date(p.created_at).toLocaleString() : 'Just now'}</span>
+            <button class="post-delete" data-id="${p.id}" title="Delete">[ DEL ]</button>
+          </div>
+        </li>
+      `).join('');
+
+      postList.querySelectorAll('.post-delete').forEach(btn => {
+        btn.addEventListener('click', () => deletePost(btn.dataset.id));
+      });
+    }
+
+    document.getElementById('btn-post').addEventListener('click', async () => {
+      clearAlert(postAlert);
+      const title   = document.getElementById('post-title').value.trim();
+      const content = document.getElementById('post-content').value.trim();
+
+      if (!title || !content) return showAlert(postAlert, '⚠ Title and content required.');
+
+      setLoading(document.getElementById('btn-post'), 'post-label', true);
+
+      try {
+        /* --- Option A: Direct Supabase DB --- */
+        const { error } = await supabase.from('posts').insert([{ title, content }]);
+        if (error) throw error;
+
+        /* --- Option B: Custom REST API (uncomment if using a REST API)
+        const res = await fetch(`${API_BASE}/api/posts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: JSON.stringify({ title, content })
+        });
+        if (!res.ok) throw new Error('Failed to post');
+        --- */
+
+        document.getElementById('post-title').value   = '';
+        document.getElementById('post-content').value = '';
+        showAlert(postAlert, '✔ Report published.', 'success');
+        fetchPosts();
+        setTimeout(() => clearAlert(postAlert), 3000);
+      } catch (err) {
+        showAlert(postAlert, `⚠ ${err.message}`);
+      } finally {
+        setLoading(document.getElementById('btn-post'), 'post-label', false, 'Publish Report');
+      }
+    });
+
+    async function deletePost(id) {
+      try {
+        /* --- Option A: Direct Supabase DB --- */
+        const { error } = await supabase.from('posts').delete().eq('id', id);
+        if (error) throw error;
+        fetchPosts();
+
+        /* --- Option B: Custom REST API (uncomment if using a REST API)
+        await fetch(`${API_BASE}/api/posts/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        fetchPosts();
+        --- */
+      } catch (err) {
+        console.error('Delete failed:', err.message);
+      }
+    }
+
+    /* ── UTILS ─────────────────────────────────────────── */
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ── RESTORE SESSION ON LOAD ───────────────────────── */
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        authToken   = data.session.access_token;
+        currentUser = data.session.user;
+        const name  = currentUser.user_metadata?.name || currentUser.email?.split('@')[0] || 'Operator';
+        enterDashboard(name);
+      }
+    })();
+
+  </script>
 </body>
 </html>
